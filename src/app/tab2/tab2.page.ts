@@ -160,16 +160,16 @@ export class Tab2Page {
 
     // traitement en deux étapes, pour accélerer le traitement des chaînes sans caractères codés sur deux octets
     // suppression des signes diacritiques sur 1 octet + 3 lettres pour le français français
-    for (var i = 0; i &lt; diac_fr.length; i++) {
-    chaine = chaine.replace(diac_fr[i][1],diac_fr[i][0]);
+    for (var i = 0; i < diac_fr.length; i++) {
+      chaine = chaine.replace(diac_fr[i][1],diac_fr[i][0]);
     }
 
     // suppression des signes diacritiques sur 2 octets, uniquement s'il y en a
     var car_etendus = /[\u0100-\u1EFE]/g;
     if (car_etendus.test (chaine)) {
-    for (var i = 0; i &lt; diac_autres.length; i++) {
-    chaine = chaine.replace(diac_autres[i][1],diac_autres[i][0]);
-    }
+      for (var i = 0; i < diac_autres.length; i++) {
+        chaine = chaine.replace(diac_autres[i][1],diac_autres[i][0]);
+      }
     }
 
     return chaine;
