@@ -1,6 +1,8 @@
 {
   "name": "spoiler",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "dd7197e3"
 }

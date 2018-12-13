@@ -1,0 +1,8 @@
+version: '2'
+services:
+    app:
+        container_name: karma2_ionic
+        image: agileek/ionic-framework
+        volumes:
+            - .:/myApp
+            #- ~/.gradle:/root/.gradle

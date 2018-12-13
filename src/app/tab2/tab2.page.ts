@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  public spoiler = {};
+  public spoiler:any = {};
   public reponse = "";
   public total = 0;
   public tentative = 0;
@@ -52,9 +52,9 @@ export class Tab2Page {
     return str.toLowerCase();
   }
 
-  private function remplace_diacritiques_latins(chaine) {
+  private remplace_diacritiques_latins(chaine){
 
-    var diac_fr =[
+    var diac_fr = [
     // Tous les diacritiques codés sur un octet et Ÿ Œ œ
     ['a',/[\u00AA\u00E0\u00E1\u00E2\u00E3\u00E4\u00E5]/g], // a
     ['A',/[\u00C0\u00C1\u00C2\u00C3\u00C4\u00C5]/g], // A
