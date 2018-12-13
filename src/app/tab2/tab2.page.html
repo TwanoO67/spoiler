@@ -1,9 +1,21 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Spoiler
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  Total de point: {{total}}<br/>
+  <br/>
+  <div v-if="spoiler.titre">
+    {{ spoiler.description }} <br/>
+    <br/>
+    <input type="text" [(ngModel)]="reponse" /><br/>
+    <button ion-button secondary (click)="verify()">Ok</button>
+  </div>
+
+
+</ion-content>
