@@ -12,22 +12,26 @@ export class Tab2Page {
   public total = 0;
   public tentative = 0;
   public max_tentative = 3;
+  public past = 0;
 
   private donnee = [
     {
       "description": "... et à la fin, il se rend compte que son psy est mort",
       "titre": "Le sixieme sens",
-      "titre_alternatif": "6ieme sens"
+      "titre_alternatif": "6ieme sens",
+      done: false
     },
     {
       "description": "... et à la fin, les singes ne dominent pas le monde",
       "titre": "La planète des singes",
-      "titre_alternatif": ""
+      "titre_alternatif": "",
+      done: false
     },
     {
       "description": "... et à la fin, il perd wilson",
       "titre": "Seul au monde",
-      "titre_alternatif": ""
+      "titre_alternatif": "",
+      done: false
     }
   ];
 
@@ -188,11 +192,35 @@ export class Tab2Page {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  private nextSpoiler(){
-    this.tentative = 0;
-    this.reponse = "";
+  private findRandSpoiler(){
     let rand = this.getRandomArbitrary(0, this.donnee.length - 1);
-    console.log(rand);
+    if(this.donnee[rand].done === true){
+      rand = this.findNextSpoiler(rand);
+    }
+    return rand;
+  }
+
+  private findNextSpoiler(num){
+   while(this.donnee[num].done === true){
+    num++;
+    if(num > this.donnee.length){
+      num = 0;
+    }
+   }
+   return num;
+  }
+
+  private nextSpoiler(){
+    this.spoiler.done = true;
+    this.tentative = 0;
+    this.past++;
+    if(this.past >= this.donnee.length){
+      alert('Vous avez fini le jeu!');
+      return true;
+    }
+    this.reponse = "";
+    let rand = this.findRandSpoiler();
+    
     this.spoiler = this.donnee[rand];
   }
 

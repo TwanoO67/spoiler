@@ -1,20 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Spoiler
+      SPOILER!!!
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
+  <div class="mainContainer">
+    <div v-if="spoiler.titre">
 
-  Total de point: {{total}}<br/>
-  <br/>
-  <div v-if="spoiler.titre">
-    {{ spoiler.description }} <br/>
-    <br/>
-    <input type="text" [(ngModel)]="reponse" /><br/>
-    <button ion-button secondary (click)="verify()">Ok</button>
+        <div id="description">
+            <div id="title">
+              <h3>Mes points: {{total}}</h3>
+              <ul id="menu">
+                <li>Attention! Spoiler :</li>
+              </ul>
+            </div>
+            <div id="info">
+                {{ spoiler.description }}<br/>
+                <br/>
+                <input type="text" [(ngModel)]="reponse" /><br/>
+            </div>
+          </div>
+
+      <div id="buttons">
+        <div id="ok">
+          <span (click)="verify()">Ok</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 
