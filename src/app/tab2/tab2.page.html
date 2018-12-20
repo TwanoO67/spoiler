@@ -7,21 +7,21 @@
 </ion-header>
 
 <ion-content >
-  <div class="mainContainer" [style.background-image]="'url(\''+spoiler.affiche+'\')'" >
+  <div class="mainContainer" [style.backgroundImage]="'url('+affiche+')'" >
     <div v-if="spoiler.titre">
 
         <div id="description">
             <div id="title">
               <h3>Mes points: {{total}}</h3>
               <ul id="menu">
-                <li>Attention! Spoiler :</li>
+                <li>{{ spoiler.description }}</li>
               </ul>
             </div>
             <div id="info">
-                {{ spoiler.description }}<br/>
-                <br/>
+                Titre du film:
                 <input type="text" [(ngModel)]="reponse" /><br/>
-                {{ bonne_reponse }}
+                <br/>
+                <i>{{ bonne_reponse }}</i>
             </div>
           </div>
 
