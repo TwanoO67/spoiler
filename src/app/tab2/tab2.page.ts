@@ -13,114 +13,122 @@ export class Tab2Page {
   public tentative = 0;
   public max_tentative = 3;
   public past = 0;
+  public affiche = 'http://i.imgrpost.com/imgr/2017/07/29/bond4.jpg';
+  private available = [];
 
   private donnee = [
     {
-      "description": "... et à la fin, il se rend compte que son psy est mort",
-      "titre": "Sixieme sens",
-      "titre_alternatif": "6ieme sens",
+      description: "... et à la fin, il se rend compte que son psy est mort",
+      titre: "sixieme sens",
+      titre_alternatif: "6ieme sens",
+      id_allocine: 22092,
+      affiche: "http://fr.web.img6.acsta.net/r_1920_1080/medias/nmedia/18/66/15/77/19255607.jpg",
       done: false
     },
     {
-      "description": "... et à la fin, les singes ne dominent pas le monde",
-      "titre": "La planète des singes",
-      "titre_alternatif": "",
+      description: "... et à la fin, les singes ne dominent pas le monde",
+      titre: "La planète des singes",
+      titre_alternatif: "",
+      id_allocine: 29284,
+      affiche: "http://fr.web.img6.acsta.net/r_1920_1080/medias/nmedia/00/02/26/41/69214709_af.jpg",
       done: false
     },
     {
-      "description": "... et à la fin, il perd wilson",
-      "titre": "Seul au monde",
-      "titre_alternatif": "",
+      description: "... et à la fin, il perd wilson",
+      titre: "Seul au monde",
+      id_allocine: 27770,
+      titre_alternatif: "cast away",
+      affiche: "http://fr.web.img4.acsta.net/r_1920_1080/medias/05/12/12/051212_af.jpg",
       done: false
     },
     {
-      "description": "... et à la fin, ils retrouvent le crimier.",
-      "titre": "RRRrrrr!!!",
-      "titre_alternatif": "",
+      description: "... et à la fin, ils retrouvent le crimier.",
+      titre: "RRRrrrr!!!",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il jette l'anneau dans le volcan.",
-      "titre": "Le seigneur des anneaux",
-      "titre_alternatif": "",
+      description: "... et à la fin, il jette l'anneau dans le volcan.",
+      titre: "Le seigneur des anneaux",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, Lilou Dallas multipass.",
-      "titre": "Le cinquième élément",
-      "titre_alternatif": "",
+      description: "... et à la fin, Lilou Dallas multipass.",
+      titre: "Le cinquième élément",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, ils ont tous des noms de couleurs.",
-      "titre": "Réservoir dog",
-      "titre_alternatif": "",
+      description: "... et à la fin, ils ont tous des noms de couleurs.",
+      titre: "Réservoir dog",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il ne dit plus non.",
-      "titre": "Yes Man",
-      "titre_alternatif": "",
+      description: "... et à la fin, il ne dit plus non.",
+      titre: "Yes Man",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il n'a pas gâché Noël.",
-      "titre": "Le Grinch",
-      "titre_alternatif": "",
+      description: "... et à la fin, il n'a pas gâché Noël.",
+      titre: "Le Grinch",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il se rend compte qu'il vit dans un film.",
-      "titre": "The Truman show",
-      "titre_alternatif": "",
+      description: "... et à la fin, il se rend compte qu'il vit dans un film.",
+      titre: "The Truman show",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il vit toujours la journée de la marmotte.",
-      "titre": "Un jour sans fin",
-      "titre_alternatif": "",
+      description: "... et à la fin, il vit toujours la journée de la marmotte.",
+      titre: "Un jour sans fin",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, ce n'était pas toutes des femelles.",
-      "titre": "Jurassic park",
-      "titre_alternatif": "",
+      description: "... et à la fin, ce n'était pas toutes des femelles.",
+      titre: "Jurassic park",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, ils meurent tous connement.",
-      "titre": "Destination finale",
-      "titre_alternatif": "",
+      description: "... et à la fin, ils meurent tous connement.",
+      titre: "Destination finale",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il reprend l'usine de friandises.",
-      "titre": "Charlie et la chocolaterie",
-      "titre_alternatif": "",
+      description: "... et à la fin, il reprend l'usine de friandises.",
+      titre: "Charlie et la chocolaterie",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il perd le black pearl.",
-      "titre": "Pirates des Caraïbes",
-      "titre_alternatif": "",
+      description: "... et à la fin, il perd le black pearl.",
+      titre: "Pirates des Caraïbes",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, le méchant se relève du milieu de la pièce.",
-      "titre": "SAW",
-      "titre_alternatif": "",
+      description: "... et à la fin, le méchant se relève du milieu de la pièce.",
+      titre: "SAW",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il se rend compte qu'il est Tyler Durden.",
-      "titre": "Fight club",
-      "titre_alternatif": "",
+      description: "... et à la fin, il se rend compte qu'il est Tyler Durden.",
+      titre: "Fight club",
+      titre_alternatif: "",
       done: false
     },
     {
-      "description": "... et à la fin, il s'arrête de boiter.",
-      "titre": "Usual suspect",
-      "titre_alternatif": "",
+      description: "... et à la fin, il s'arrête de boiter.",
+      titre: "Usual suspect",
+      titre_alternatif: "",
       done: false
     }
   ];
@@ -130,12 +138,12 @@ export class Tab2Page {
       this.transform(this.reponse) === this.transform(this.spoiler.titre)
       || (this.spoiler.titre_alternatif !== "" && this.transform(this.reponse) === this.transform(this.spoiler.titre_alternatif))
     ){
-      alert('OK');
+      alert("OK");
       this.total++;
       this.nextSpoiler();
     }
     else{
-      alert(' tes nul ');
+      alert(" t'es nul ");
       this.checkTentative();
     }
 
@@ -283,35 +291,28 @@ export class Tab2Page {
   }
 
   private findRandSpoiler(){
-    let rand = this.getRandomArbitrary(0, this.donnee.length - 1);
-    if(this.donnee[rand].done === true){
-      rand = this.findNextSpoiler(rand);
+    let rand = this.getRandomArbitrary(0, this.available.length - 1);
+    this.spoiler = this.available[rand];
+    if(this.spoiler.affiche){
+      this.affiche = this.spoiler.affiche;
     }
-    return rand;
-  }
-
-  private findNextSpoiler(num){
-   while(this.donnee[num].done === true){
-    num++;
-    if(num > this.donnee.length){
-      num = 0;
-    }
-   }
-   return num;
   }
 
   private nextSpoiler(){
     this.spoiler.done = true;
+    this.available = this.donnee.filter((spoil) => {
+      return !spoil.done;
+    });
     this.tentative = 0;
     this.past++;
-    if(this.past >= this.donnee.length){
+    if(this.available.length === 0){
       alert('Vous avez fini le jeu!');
       return true;
     }
     this.reponse = "";
-    let rand = this.findRandSpoiler();
-    
-    this.spoiler = this.donnee[rand];
+    this.findRandSpoiler();
+
+
   }
 
   ngOnInit(){
