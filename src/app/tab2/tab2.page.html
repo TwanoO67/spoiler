@@ -1,29 +1,42 @@
 <ion-content >
   <div class="mainContainer" [style.backgroundImage]="'url('+affiche+')'" >
-    <div v-if="spoiler.titre">
-
+    <div *ngIf="spoiler && spoiler.titre; else elseBlock">
         <div id="description">
             <div id="title">
-              <h3>Mes points: {{total}}</h3>
+              <h3>{{bonne_reponse}}</h3>
               <ul id="menu">
                 <li>{{ spoiler.description }}</li>
               </ul>
             </div>
             <div id="info">
                 Titre du film:
-                <input type="text" [(ngModel)]="reponse" /><br/>
-                <br/>
-                <i>{{ bonne_reponse }}</i>
+                <input type="text" [(ngModel)]="reponse" (keyup.enter)="verify()"/><br/>
             </div>
           </div>
 
       <div id="buttons">
-        <div id="ok">
-          <span (click)="verify()">Ok</span>
+        <div id="ok" (click)="verify()">
+          <span>Ok</span>
         </div>
       </div>
 
     </div>
+    <ng-template #elseBlock>
+      <div id="description">
+        <div id="title">
+          Partie terminée!<br/>
+        </div>
+        <ul id="menu">
+          <li>Votre score: {{total}}/10</li><br/>
+          <li>Durée de la partie: {{this.duration}} secondes</li>
+        </ul>
+      </div>
+      <div id="buttons">
+        <div id="init">
+          <span (click)="init()">Recommencer une partie</span>
+        </div>
+      </div>
+    </ng-template>
   </div>
 
 

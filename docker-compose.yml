@@ -1,7 +1,7 @@
 version: '2'
 services:
     app:
-        container_name: karma2_ionic
+        container_name: ionic
         image: agileek/ionic-framework
         volumes:
             - .:/myApp
