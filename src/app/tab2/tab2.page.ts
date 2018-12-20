@@ -9,11 +9,11 @@ export class Tab2Page {
 
   public spoiler:any = {};
   public reponse = "";
+  public bonne_reponse = "";
   public total = 0;
   public tentative = 0;
   public max_tentative = 3;
   public past = 0;
-  public affiche = 'http://i.imgrpost.com/imgr/2017/07/29/bond4.jpg';
   private available = [];
 
   private donnee = [
@@ -138,12 +138,11 @@ export class Tab2Page {
       this.transform(this.reponse) === this.transform(this.spoiler.titre)
       || (this.spoiler.titre_alternatif !== "" && this.transform(this.reponse) === this.transform(this.spoiler.titre_alternatif))
     ){
-      alert("OK");
       this.total++;
       this.nextSpoiler();
     }
     else{
-      alert(" t'es nul ");
+      this.bonne_reponse = "Mauvaise réponse... retente ta chance";
       this.checkTentative();
     }
 
@@ -293,12 +292,13 @@ export class Tab2Page {
   private findRandSpoiler(){
     let rand = this.getRandomArbitrary(0, this.available.length - 1);
     this.spoiler = this.available[rand];
-    if(this.spoiler.affiche){
-      this.affiche = this.spoiler.affiche;
+    if(!this.spoiler.affiche){
+      this.spoiler.affiche = 'http://i.imgrpost.com/imgr/2017/07/29/bond4.jpg';
     }
   }
 
   private nextSpoiler(){
+    this.bonne_reponse = this.spoiler.titre;
     this.spoiler.done = true;
     this.available = this.donnee.filter((spoil) => {
       return !spoil.done;
