@@ -1,0 +1,53 @@
+version: '2.0'
+services:
+  php:
+    container_name: "${APP_NAME}_php"
+    image: intelligensia/numesia-apache-php:7.1
+    restart: always
+    volumes:
+    #On utilise la clef ssh, et config git du poste courant
+      - "~/.ssh:/root/.ssh"
+      - "./config/ssh-wwwdata:/var/www/.ssh"
+      - "~/.gitconfig:/root/.gitconfig"
+      - "./www:/var/www/html/api"
+      - "./config/apache/sites-available:/etc/apache2/sites-available"
+      - "./config/apache/sites-enabled:/etc/apache2/sites-enabled"
+    working_dir: /var/www/html
+    ports:
+      - "${PORT}:80"
+
+    networks:
+      default:
+        aliases:
+          - "api.local"
+
+    links:
+    # for mysql container
+      - "db:db"
+
+  db:
+    container_name: "${APP_NAME}_db"
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - "./data/db:/var/lib/mysql"
+
+  phpmyadmin:
+    container_name: "${APP_NAME}_phpmyadmin"
+    restart: always
+    image: phpmyadmin/phpmyadmin
+    environment:
+      # PMA_ARBITRARY: 1
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "${PMA_PORT}:80"
+    links:
+      # for mysql container
+      - "db:db"
+
+volumes:
+    db:
+      driver: "local"
