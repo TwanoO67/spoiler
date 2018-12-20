@@ -17,7 +17,7 @@ export class Tab2Page {
   private donnee = [
     {
       "description": "... et à la fin, il se rend compte que son psy est mort",
-      "titre": "Le sixieme sens",
+      "titre": "Sixieme sens",
       "titre_alternatif": "6ieme sens",
       done: false
     },
@@ -30,6 +30,96 @@ export class Tab2Page {
     {
       "description": "... et à la fin, il perd wilson",
       "titre": "Seul au monde",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, ils retrouvent le crimier.",
+      "titre": "RRRrrrr!!!",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il jette l'anneau dans le volcan.",
+      "titre": "Le seigneur des anneaux",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, Lilou Dallas multipass.",
+      "titre": "Le cinquième élément",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, ils ont tous des noms de couleurs.",
+      "titre": "Réservoir dog",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il ne dit plus non.",
+      "titre": "Yes Man",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il n'a pas gâché Noël.",
+      "titre": "Le Grinch",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il se rend compte qu'il vit dans un film.",
+      "titre": "The Truman show",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il vit toujours la journée de la marmotte.",
+      "titre": "Un jour sans fin",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, ce n'était pas toutes des femelles.",
+      "titre": "Jurassic park",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, ils meurent tous connement.",
+      "titre": "Destination finale",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il reprend l'usine de friandises.",
+      "titre": "Charlie et la chocolaterie",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il perd le black pearl.",
+      "titre": "Pirates des Caraïbes",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, le méchant se relève du milieu de la pièce.",
+      "titre": "SAW",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il se rend compte qu'il est Tyler Durden.",
+      "titre": "Fight club",
+      "titre_alternatif": "",
+      done: false
+    },
+    {
+      "description": "... et à la fin, il s'arrête de boiter.",
+      "titre": "Usual suspect",
       "titre_alternatif": "",
       done: false
     }
