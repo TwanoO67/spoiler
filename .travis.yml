@@ -1,0 +1,14 @@
+language: ruby
+
+services:
+  - docker
+
+before_install:
+- rm -rf node_modules
+- docker-compose run app npm install
+- docker-compose run app npm rebuild node-sass --force
+- docker-compose run app ionic cordova build android
+
+script:
+- docker-compose run app ionic cordova build android
+- curl -H "WAM_UPLOAD_TOKEN: $WAM_UPLOAD_TOKEN" --request POST --data-binary "@app-debug.apk"  http://dl.weberantoine.fr/reception.php
