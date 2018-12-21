@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-game',
+  templateUrl: 'game.page.html',
+  styleUrls: ['game.page.scss']
 })
-export class Tab2Page {
+export class GamePage {
 
   public spoiler:any = {};
   public reponse = "";

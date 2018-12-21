@@ -9,20 +9,20 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab2',
+        path: 'game',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: '../game/game.module#GamePageModule'
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'settings',
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: '../settings/settings.module#SettingsPageModule'
           }
         ]
       },
@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/tab2',
+    redirectTo: '/tabs/game',
     pathMatch: 'full'
   }
 ];

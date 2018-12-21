@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { Tab2PageModule } from '../tab2/tab2.module';
-import { Tab3PageModule } from '../tab3/tab3.module';
+import { GamePageModule } from '../game/game.module';
+import { SettingsPageModule } from '../settings/settings.module';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { Tab3PageModule } from '../tab3/tab3.module';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    Tab2PageModule,
-    Tab3PageModule
+    GamePageModule,
+    SettingsPageModule
   ],
   declarations: [TabsPage]
 })
