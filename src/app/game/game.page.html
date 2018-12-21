@@ -1,5 +1,6 @@
 <ion-content >
   <div class="mainContainer" [style.backgroundImage]="'url('+affiche+')'" >
+
     <div *ngIf="spoiler && spoiler.titre; else elseBlock">
         <div id="description">
             <div id="title">
@@ -19,14 +20,15 @@
           <span>Ok</span>
         </div>
       </div>
-
     </div>
-    <ng-template #elseBlock>
+
+    <div *ngIf="!spoiler && !welcome">
       <div id="description">
         <div id="title">
-          <h3>Partie terminée!</h3>
+          <h3>{{bonne_reponse}}</h3>
         </div>
         <ul id="menu">
+          <li>Partie terminée!</li><br/>
           <li>Votre score: {{total}}/10</li><br/>
           <li>Durée de la partie: {{this.duration}} secondes</li>
         </ul>
@@ -36,7 +38,27 @@
           <span (click)="init()">Recommencer une partie</span>
         </div>
       </div>
-    </ng-template>
+    </div>
+
+    <div *ngIf="welcome">
+      <div id="description">
+          <div id="title">
+            <h3>Spoiler !</h3>
+            <ul id="menu">
+              <li>Le Quizz qui vous ruine la fin des films!</li>
+            </ul>
+          </div>
+          <div id="info">
+              Trouvez le nom des films dont on vous raconte la fin.
+          </div>
+        </div>
+      <div id="buttons">
+        <div id="ok" (click)="init()">
+          <span>Lancer la partie</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 
