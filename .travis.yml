@@ -11,4 +11,5 @@ before_install:
 
 script:
 - docker-compose run app ionic cordova build android
-- curl -H "WAM_UPLOAD_TOKEN: $WAM_UPLOAD_TOKEN" --request POST --data-binary "@/myApp/platforms/android/app/build/outputs/apk/debug/app-debug.apk"  http://dl.weberantoine.fr/reception.php
+- ls -al
+- curl -H "WAM_UPLOAD_TOKEN: $WAM_UPLOAD_TOKEN" --request POST --data-binary "@platforms/android/app/build/outputs/apk/debug/app-debug.apk"  http://dl.weberantoine.fr/reception.php

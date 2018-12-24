@@ -16,8 +16,16 @@
           </div>
 
       <div id="buttons">
-        <div id="ok" (click)="verify()">
-          <span>Ok</span>
+        <div class="yellow-btn" *ngIf="loading">
+          Chargement...
+        </div>
+        <div *ngIf="!loading">
+          <div class="yellow-btn" (click)="verify()">
+            <span>Ok</span>
+          </div>
+          <div class="yellow-btn" (click)="nextSpoiler()">
+            <span>Passer</span>
+          </div>
         </div>
       </div>
     </div>

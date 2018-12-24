@@ -23,6 +23,7 @@ export class GamePage {
   private start_date = 0;
   public duration = 0;
   public welcome = true;
+  public loading = false;
   private donnee = [];
 
   constructor(
@@ -175,10 +176,11 @@ export class GamePage {
   }
 
   public verify(){
-
+    this.loading = true;
     this.http.get("https://api.themoviedb.org/3/search/movie?api_key="+this.apikey+"&query="+this.reponse).subscribe(
       (reponse:any) => {
         console.log(reponse);
+        this.loading = false;
         let verify = false;
         reponse.results.slice(0,9).forEach((result) => {
           if(this.spoiler.id_themoviedb === result.id){
