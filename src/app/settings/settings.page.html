@@ -5,23 +5,24 @@ Créer ici votre nouveau SPOILER!<br/>
   Titre du film:
   <input type="text" [(ngModel)]="titre" (keyup.enter)="search()"/><br/>
   <br/>
-  <button (click)="search()" >Rechercher</button>
+  <ion-button (click)="search()" >Rechercher</ion-button>
 </div>
 <div *ngIf="this.step === 2" >
   Choisissez parmis ces titres originaux:<br/>
-  <select class="form-control" required [(ngModel)]="spoiler.id_themoviedb" (change)="this.step = 3">
+  <select class="form-control" required [(ngModel)]="spoiler.id_themoviedb">
     <option *ngFor="let pow of movies" [value]="pow.id">{{pow.title}}</option>
-  </select>
+  </select><br/>
+  <ion-button (click)="this.step = 3" >Ok</ion-button>
+  <ion-button (click)="this.step = 1" >Le film n'est pas dans la liste</ion-button>
 </div>
 
 <div *ngIf="this.step === 3">
   Spoiler: <input type="text" [(ngModel)]="spoiler.description" (keyup.enter)="search()" placeholder="et à la fin..."/><br/>
-  <button (click)="save()" >Enregistrer</button>
+  <ion-button (click)="save()" >Enregistrer</ion-button>
 </div>
 
 <div *ngIf="this.step === 4">
   Merci votre spoiler est bien enregistré!
-  <button (click)="save()" >Enregistrer</button>
 </div>
 
 <div *ngIf="this.loading">

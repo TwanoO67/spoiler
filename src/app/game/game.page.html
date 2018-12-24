@@ -23,7 +23,7 @@
           <div class="yellow-btn" (click)="verify()">
             <span>Ok</span>
           </div>
-          <div class="yellow-btn" (click)="nextSpoiler()">
+          <div class="yellow-btn" (click)="pass()">
             <span>Passer</span>
           </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <ul id="menu">
           <li>Partie terminée!</li><br/>
-          <li>Votre score: {{total}}/10</li><br/>
+          <li>Votre score: {{total}}/{{this.done.length}}/li><br/>
           <li>Durée de la partie: {{this.duration}} secondes</li>
         </ul>
       </div>
