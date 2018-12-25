@@ -1,32 +1,52 @@
 <ion-content>
-Créer ici votre nouveau SPOILER!<br/>
-<br/>
-<div *ngIf="this.step === 1" >
-  Titre du film:
-  <input type="text" [(ngModel)]="titre" (keyup.enter)="search()"/><br/>
-  <br/>
-  <ion-button (click)="search()" >Rechercher</ion-button>
-</div>
-<div *ngIf="this.step === 2" >
-  Choisissez parmis ces titres originaux:<br/>
-  <select class="form-control" required [(ngModel)]="spoiler.id_themoviedb">
-    <option *ngFor="let pow of movies" [value]="pow.id">{{pow.title}}</option>
-  </select><br/>
-  <ion-button (click)="this.step = 3" >Ok</ion-button>
-  <ion-button (click)="this.step = 1" >Le film n'est pas dans la liste</ion-button>
-</div>
+  <div class="my-form">
+    Créer ici votre nouveau SPOILER!<br/>
+    <br/>
+    <div *ngIf="this.step === 1" >
+      <p>
+        <label for="titre">Titre du film</label>
+        <span class="wrap">
+          <input type="text" [(ngModel)]="titre" (keyup.enter)="search()" name="titre"/><br/>
+        </span>
+      </p>
+      <p class="cta-holder">
+        <button (click)="search()" class="cta-button" >Rechercher</button>
+    	</p>
+    </div>
+    <div *ngIf="this.step === 2" >
+      <p>
+        <label for="movie">Choisissez parmis ces titres originaux</label>
+        <select class="form-control" required [(ngModel)]="spoiler.id_themoviedb" name="movie">
+          <option *ngFor="let pow of movies" [value]="pow.id">{{pow.title}}</option>
+        </select>
+      <p>
+      <p class="cta-holder">
+        <button (click)="this.step = 3" class="cta-button">Ok</button>&nbsp;&nbsp;
+        <button (click)="this.step = 1" class="cta-button" style="float:right">Le film n'est pas dans la liste</button>
+      </p>
+    </div>
 
-<div *ngIf="this.step === 3">
-  Spoiler: <input type="text" [(ngModel)]="spoiler.description" (keyup.enter)="search()" placeholder="et à la fin..."/><br/>
-  <ion-button (click)="save()" >Enregistrer</ion-button>
-</div>
+    <div *ngIf="this.step === 3">
+      <p>
+        <label for="movie">Spoiler</label>
+        <textarea name="movie" cols="40" rows="10" class="textarea" aria-invalid="false" [(ngModel)]="spoiler.description" (keyup.enter)="search()" placeholder="et à la fin..."></textarea>
+      </p>
+      <p class="cta-holder">
+        <button (click)="save()" class="cta-button">Enregistrer</button>
+      </p>
+    </div>
 
-<div *ngIf="this.step === 4">
-  Merci votre spoiler est bien enregistré!
-</div>
+    <div *ngIf="this.step === 4">
+      <p>
+        Merci votre spoiler est bien enregistré!
+      </p>
+    </div>
 
-<div *ngIf="this.loading">
-  Chargement en cours...
-</div>
+    <div *ngIf="this.loading">
+      <p>
+        Chargement en cours...
+      </p>
+    </div>
 
+  </div>
 </ion-content>
