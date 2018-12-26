@@ -1,8 +1,8 @@
 <ion-content>
-  <div class="my-form">
+  <div class="my-form" >
     Créer ici votre nouveau SPOILER!<br/>
     <br/>
-    <div *ngIf="this.step === 1" >
+    <div *ngIf="this.step === 'title'" >
       <p>
         <label for="titre">Titre du film</label>
         <span class="wrap">
@@ -10,10 +10,10 @@
         </span>
       </p>
       <p class="cta-holder">
-        <button (click)="search()" class="cta-button" >Rechercher</button>
+        <button (click)="search()" class="cta-button" style="float:right">Rechercher</button>
     	</p>
     </div>
-    <div *ngIf="this.step === 2" >
+    <div *ngIf="this.step === 'select'" >
       <p>
         <label for="movie">Choisissez parmis ces titres originaux</label>
         <select class="form-control" required [(ngModel)]="spoiler.id_themoviedb" name="movie">
@@ -21,24 +21,40 @@
         </select>
       <p>
       <p class="cta-holder">
-        <button (click)="this.step = 3" class="cta-button">Ok</button>&nbsp;&nbsp;
-        <button (click)="this.step = 1" class="cta-button" style="float:right">Le film n'est pas dans la liste</button>
+
+        <button (click)="this.step = 'title'" class="cta-button" >Annuler</button>
+        <button (click)="select()" class="cta-button" style="float:right">Ok</button>
       </p>
     </div>
 
-    <div *ngIf="this.step === 3">
+    <div *ngIf="this.step === 'spoil'" [style.backgroundImage]="'url('+affiche+')'"
+    style="background-repeat: no-repeat; background-attachment: fixed; background-position: center;" >
+          <h3 style="color:yellow">{{spoiler.titre}}</h3>
+          <p class="cta-holder" style="margin-left:auto; margin-right: auto; text-align: center;">
+            <label for="movie">Spoiler</label>
+            <textarea name="movie" cols="40" rows="10" class="textarea" aria-invalid="false" [(ngModel)]="spoiler.description" (keyup.enter)="search()" placeholder="et à la fin..."></textarea>
+          </p>
+          <p class="cta-holder">
+            <button (click)="newspoil()" class="cta-button">Annuler</button>
+            <button (click)="save()" class="cta-button" style="float:right">Enregistrer</button>
+          </p>
+    </div>
+
+    <div *ngIf="this.step === 'exist'">
       <p>
-        <label for="movie">Spoiler</label>
-        <textarea name="movie" cols="40" rows="10" class="textarea" aria-invalid="false" [(ngModel)]="spoiler.description" (keyup.enter)="search()" placeholder="et à la fin..."></textarea>
+        Désolé, Un spoiler existe déjà pour ce film.
       </p>
       <p class="cta-holder">
-        <button (click)="save()" class="cta-button">Enregistrer</button>
+        <button (click)="newspoil()" class="cta-button" style="float:right">Créer un autre Spoiler</button>
       </p>
     </div>
 
-    <div *ngIf="this.step === 4">
+    <div *ngIf="this.step === 'thanks'">
       <p>
         Merci votre spoiler est bien enregistré!
+      </p>
+      <p class="cta-holder">
+        <button (click)="newspoil()" class="cta-button">Créer un autre Spoiler</button>
       </p>
     </div>
 

@@ -1,9 +1,9 @@
-
 .my-form {
 	background: #efefef;
 	padding: 20px;
 	max-width: 800px;
 	margin: 0 auto;
+  text-align: center;
 }
 
 .my-form p {
@@ -33,7 +33,8 @@
 .my-form p span select,
 .my-form p span textarea {
 	background: rgba(0, 0, 0, 0);
-	border: 0px none;
+	//border: 0px none;
+  border-style: inset;
 	color: #666666;
 	cursor: pointer;
 	font-size: 1em;

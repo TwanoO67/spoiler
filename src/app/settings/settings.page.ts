@@ -17,12 +17,35 @@ export class SettingsPage {
   private urltmdb = "https://api.themoviedb.org/3/";
   private urlapi = "http://test.weberantoine.fr/SPOILER/api.php/";
   private spoiler: any = {};
-  private step = 1;
+  private step = 'title';
   private loading = false;
+  private donnee = [];
+  private affiche = 'https://s3.amazonaws.com/storenvy/product_photos/112446/spoiler_alert_original.jpg';
 
   constructor(
     private http: HttpClient
-  ) {
+  ) {}
+
+  public ngOnInit(){
+    this.init();
+    this.http.get(this.urlapi+"records/spoiler?filter=valid,eq,1",this.spoiler).subscribe(
+      (reponse:any) => {
+        this.donnee = reponse.records;
+      }
+    );
+  }
+
+  public newspoil(){
+    this.init();
+    this.step = 'title';
+  }
+
+  public init(){
+    this.loading = false;
+    this.titre = '';
+    this.spoiler = {
+      description: "...et à la fin, "
+    };
   }
 
   public search(){
@@ -30,28 +53,42 @@ export class SettingsPage {
     this.http.get(this.urltmdb+"search/movie?api_key="+this.apikey+"&language=fr&query="+this.titre).subscribe(
       (reponse:any) => {
         this.movies = reponse.results;
-        this.step = 2;
+        this.step = 'select';
         this.loading = false;
-        console.log(reponse);
       }
     )
   }
 
+  public select(){
+    let exists = this.donnee.find((m) => {
+      return m.id_themoviedb === Number.parseInt(this.spoiler.id_themoviedb);
+    });
+    if(!exists){
+      this.step = 'spoil';
+      let movie = this.movies.find((m: any) => {
+        return m.id === Number.parseInt(this.spoiler.id_themoviedb);
+      });
+      console.log(movie);
+      this.spoiler.titre = movie.title;
+      this.spoiler.titre_original = movie.original_title;
+      this.affiche = 'https://image.tmdb.org/t/p/w500'+ movie.poster_path;
+    }
+    else {
+      this.step = "exist";
+    }
+  }
+
   public save(){
     this.loading = true;
-    console.log(this.movies,this.spoiler.id_themoviedb);
-    let movie = this.movies.find((m: any) => {
-      return m.id === Number.parseInt(this.spoiler.id_themoviedb);
-    });
-    console.log(movie);
-    this.spoiler.titre = movie.title;
-    this.spoiler.titre_original = movie.original_title;
     this.http.post(this.urlapi+"records/spoiler",this.spoiler).subscribe(
       (reponse:any) => {
-        this.step = 4;
-        this.loading = false;
-        console.log(reponse)
-      }
+        this.step = 'thanks';
+        console.log(reponse);
+      },
+      (error:any) => {
+        this.step = 'thanks';
+        console.log(error);
+      },
     )
 
   }
