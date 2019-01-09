@@ -10,7 +10,6 @@ export class GamePage {
 
   public spoiler:any = {};
   public reponse = "";
-  public bonne_reponse = "";
   public total = 0;
   public tentative = 0;
   public max_tentative = 3;
@@ -24,7 +23,7 @@ export class GamePage {
   private urlapi = "http://test.weberantoine.fr/SPOILER/api.php/";
   private start_date = 0;
   public duration = 0;
-  public welcome = true;
+  public step = "welcome";
   public loading = false;
   private donnee = [];
 
@@ -42,14 +41,13 @@ export class GamePage {
 
   public init(){
     this.done = [];
-    this.welcome = false;
+    this.step = "welcome";
     this.available = [];
     this.start_date = Date.now();
     this.duration = 0;
     this.total = 0;
     this.past = 0;
     this.reponse = "";
-    this.bonne_reponse = "Nouvelle partie";
 
     this.nextSpoiler();
   }
@@ -79,19 +77,17 @@ export class GamePage {
   }
 
   public pass(){
-    this.bonne_reponse = this.spoiler.titre;
     this.nextSpoiler();
   }
 
   public traiteReponse(verify){
     this.loading = false;
     if(verify){
+      this.step = "good_answer";
       this.total++;
-      this.bonne_reponse = this.spoiler.titre;
-      this.nextSpoiler();
     }
     else{
-      this.bonne_reponse = "Mauvaise réponse... retente ta chance";
+      this.step = "wrong_answer";
       this.checkTentative();
     }
   }
@@ -101,6 +97,7 @@ export class GamePage {
       this.nextSpoiler()
     }
     else{
+      this.step = "question";
       this.tentative++;
     }
   }
@@ -116,6 +113,7 @@ export class GamePage {
 
   private nextSpoiler(){
     //on marque le spoiler comme vu
+    this.step = "question";
     if(this.spoiler){
       this.spoiler.done = true;
       this.done.push(this.spoiler);
@@ -157,7 +155,7 @@ export class GamePage {
   }
 
   ngOnInit(){
-    this.welcome = true;
+    this.step = "welcome";
     this.affiche = this.default_affiche;
   }
 }
