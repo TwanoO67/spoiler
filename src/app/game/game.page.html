@@ -70,7 +70,10 @@
   </div>
 
   <div *ngIf="step === 'good_answer'">
-      <div class="mainContainer" [style.backgroundImage]="'url('+affiche+')'" >
+      <div class="mainContainer" >
+          <div id="description">
+            <img [src]="affiche" />
+          </div>
           <div id="buttons">
             <div class="yellow-btn" *ngIf="loading">
               Chargement...
