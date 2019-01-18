@@ -1,107 +1,117 @@
 <ion-content >
-  <div *ngIf="step === 'welcome'" class="mainContainer" [style.backgroundImage]="'url('+default_affiche+')'" >
-    <div id="description">
-        <div id="title">
-          <h3>Spoiler !</h3>
-          <ul id="menu">
-            <li>Le Quizz qui vous ruine la fin des films!</li>
-          </ul>
-        </div>
-        <div id="info">
-            Trouvez le nom des films dont on vous raconte la fin.
-        </div>
+  <div *ngIf="step === 'welcome'" class="container" >
+    <div class="header"><h3>Spoiler !</h3></div>
+
+    <div class="main">
+      <div class="title">
+        Le Quizz qui vous ruine la fin des films!
       </div>
-    <div id="buttons">
-      <div id="ok" (click)="init()">
-        <span>Lancer la partie</span>
+      <div class="info">
+          Trouvez le nom des films dont on vous raconte la fin.
       </div>
     </div>
+
+    <div class="footer">
+
+      <div id="buttons">
+        <div class="yellow-btn" (click)="init()">
+          <span>Lancer la partie</span>
+        </div>
+        <div class="yellow-btn" (click)="gotocreate()">
+          <span>Créer un spoiler</span>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
 
-  <div class="mainContainer" *ngIf="step === 'question'" [style.backgroundImage]="'url('+default_affiche+')'">
-    <div id="description">
-      <div id="title">
-        <h3>Trouvez le film suivant:</h3>
-        <ul id="menu">
-          <li>{{ spoiler.description }}</li>
-        </ul>
+  <div class="container" *ngIf="step === 'question'">
+    <div class="header">
+      <h3>De quel film s'agit-il ?</h3>
+    </div>
+
+    <div class="main">
+      <div class="title">
+        {{ spoiler.description }}
       </div>
-      <div id="info">
+
+      <div class="info">
           Titre du film:
           <input type="text" [(ngModel)]="reponse" (keyup.enter)="verify()"/><br/>
       </div>
     </div>
 
-    <div id="buttons">
-      <div class="yellow-btn" *ngIf="loading">
-        Chargement...
-      </div>
-      <div *ngIf="!loading">
-        <div class="yellow-btn" (click)="verify()">
+    <div class="footer">
+      <div id="buttons">
+        <div class="yellow-btn" *ngIf="loading">
+          Chargement...
+        </div>
+        <div class="yellow-btn" (click)="verify()" *ngIf="!loading">
           <span>Ok</span>
         </div>
-        <div class="yellow-btn" (click)="pass()">
+        <div class="yellow-btn" (click)="pass()" *ngIf="!loading">
           <span>Passer</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container" *ngIf="step === 'wrong_answer'">
+      <div class="header">
+        <h3>Mauvaise réponse... </h3>
+      </div>
+
+      <div class="footer">
+        <div id="buttons">
+          <div class="yellow-btn" *ngIf="loading">
+            Chargement...
+          </div>
+          <div class="yellow-btn" *ngIf="tentative < max_tentative && !loading" (click)="checkTentative()">
+            <span >Ré-essayer ?</span>
+          </div>
+          <div class="yellow-btn" (click)="pass()" *ngIf="!loading">
+            <span *ngIf="tentative < max_tentative">Question Suivante</span>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  <div class="container" *ngIf="step === 'good_answer'" >
+    <div class="main" style="background-color:black;">
+      <img [src]="affiche" width='90%' style="margin-left:auto;margin-right:auto;"/>
+    </div>
+    <div class="footer">
+      <div id="buttons">
+        <div class="yellow-btn" *ngIf="loading">
+          Chargement...
+        </div>
+        <div class="yellow-btn" (click)="nextSpoiler()" *ngIf="!loading">
+          <span>Question Suivante</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="step === 'wrong_answer'">
-      <div class="mainContainer" [style.backgroundImage]="'url('+default_affiche+')'">
-          <div id="description">
-              Mauvaise réponse... <br/>
-          </div>
-          <div id="buttons">
-            <div class="yellow-btn" *ngIf="loading">
-              Chargement...
-            </div>
-            <div *ngIf="!loading">
-              <div class="yellow-btn" *ngIf="tentative < max_tentative" (click)="checkTentative()">
-                <span >Ré-essayer ?</span>
-              </div>
-              <div class="yellow-btn" (click)="pass()">
-                <span *ngIf="tentative < max_tentative">Question Suivante</span>
-              </div>
-            </div>
-          </div>
+
+  <div class="container" *ngIf="step === 'result'">
+    <div class="header">
+      <h3>Partie terminée!</h3>
+    </div>
+    <div class="main">
+        Votre score: {{total}}/{{this.done.length}}<br/>
+        Durée de la partie: {{this.duration}} secondes
+    </div>
+    <div class="footer">
+      <div id="buttons">
+        <div class="yellow-btn">
+          <span (click)="gotohome()">Retour à l'accueil</span>
+        </div>
       </div>
+    </div>
   </div>
 
-  <div *ngIf="step === 'good_answer'">
-      <div class="mainContainer" >
-          <div id="description">
-            <img [src]="affiche" />
-          </div>
-          <div id="buttons">
-            <div class="yellow-btn" *ngIf="loading">
-              Chargement...
-            </div>
-            <div *ngIf="!loading">
-              <div class="yellow-btn" (click)="nextSpoiler()">
-                <span>Question Suivante</span>
-              </div>
-            </div>
-          </div>
-      </div>
-  </div>
-  <div *ngIf="step === 'result'">
-      <div class="mainContainer">
-        <div id="description">
-          <div id="title">
-            <h3>Partie terminée!</h3>
-          </div>
-          <ul id="menu">
-            <li>Votre score: {{total}}/{{this.done.length}}</li><br/>
-            <li>Durée de la partie: {{this.duration}} secondes</li>
-          </ul>
-        </div>
-        <div id="buttons">
-          <div id="init">
-            <span (click)="init()">Recommencer une partie</span>
-          </div>
-        </div>
-      </div>
-  </div>
 </ion-content>

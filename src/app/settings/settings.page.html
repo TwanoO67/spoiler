@@ -1,8 +1,11 @@
 <ion-content>
-  <div class="my-form" >
-    Créer ici votre nouveau SPOILER!<br/>
-    <br/>
-    <div *ngIf="this.step === 'title'" >
+  <div class="container" >
+    <div class="header">
+    Créer ici votre nouveau SPOILER!
+    </div>
+
+
+    <div class="main" *ngIf="this.step === 'title'" >
       <p>
         <label for="titre">Titre du film</label>
         <span class="wrap">
@@ -13,7 +16,8 @@
         <button (click)="search()" class="cta-button" style="float:right">Rechercher</button>
     	</p>
     </div>
-    <div *ngIf="this.step === 'select'" >
+
+    <div class="main" *ngIf="this.step === 'select'" >
       <p>
         <label for="movie">Choisissez parmis ces titres originaux</label>
         <select class="form-control" required [(ngModel)]="spoiler.id_themoviedb" name="movie">
@@ -27,7 +31,7 @@
       </p>
     </div>
 
-    <div *ngIf="this.step === 'spoil'" [style.backgroundImage]="'url('+affiche+')'"
+    <div class="main" *ngIf="this.step === 'spoil'" [style.backgroundImage]="'url('+affiche+')'"
     style="background-repeat: no-repeat; background-attachment: fixed; background-position: center;" >
           <h3 style="color:yellow">{{spoiler.titre}}</h3>
           <p class="cta-holder" style="margin-left:auto; margin-right: auto; text-align: center;">
@@ -40,7 +44,7 @@
           </p>
     </div>
 
-    <div *ngIf="this.step === 'exist'">
+    <div class="main" *ngIf="this.step === 'exist'">
       <p>
         Désolé, Un spoiler existe déjà pour ce film.
       </p>
@@ -49,7 +53,7 @@
       </p>
     </div>
 
-    <div *ngIf="this.step === 'thanks'">
+    <div class="main" *ngIf="this.step === 'thanks'">
       <p>
         Merci votre spoiler est bien enregistré!
       </p>
@@ -58,10 +62,18 @@
       </p>
     </div>
 
-    <div *ngIf="this.loading">
+    <div class="main" *ngIf="this.loading">
       <p>
         Chargement en cours...
       </p>
+    </div>
+
+    <div class="footer">
+      <div id="buttons">
+        <div class="yellow-btn" (click)="gotohome()">
+          <span>Accueil</span>
+        </div>
+      </div>
     </div>
 
   </div>

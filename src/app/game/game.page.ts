@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -28,7 +29,8 @@ export class GamePage {
   private donnee = [];
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     //chargement des données
     this.http.get(this.urlapi+"records/spoiler?filter=valid,eq,1",this.spoiler).subscribe(
@@ -37,6 +39,10 @@ export class GamePage {
       }
     );
 
+  }
+
+  public gotohome(){
+    this.step = "welcome";
   }
 
   public init(){
@@ -50,6 +56,10 @@ export class GamePage {
     this.reponse = "";
 
     this.nextSpoiler();
+  }
+
+  public gotocreate(){
+    this.router.navigate(['settings']);
   }
 
   public verify(){
@@ -131,7 +141,7 @@ export class GamePage {
   private nextSpoiler(){
     //on marque le spoiler comme vu
     this.step = "question";
-    
+
     this.available = this.donnee.filter((spoil) => {
       return !spoil.done;
     });
@@ -148,6 +158,7 @@ export class GamePage {
   }
 
   private end(){
+    this.step = "result";
     this.duration = Math.floor( (Date.now() - this.start_date) / 1000 );
     this.spoiler = null;
   }

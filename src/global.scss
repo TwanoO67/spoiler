@@ -9,3 +9,65 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga" on;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header,.footer {
+  padding: 1rem;
+}
+
+.header {
+}
+
+.main {
+  background-color: #ececec;
+  flex: 1 1 auto;
+  // flex: 1 0 auto; // use this to implement sticky footer
+  overflow-y: scroll;
+  padding: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+#buttons{
+  //height:80px;
+  display:flex;
+  justify-content:space-between;
+  bottom: 0;
+  width: 100%;
+/*   align-items:center; */
+}
+
+.yellow-btn{
+  width:49.9%;
+  margin-left:auto;
+  margin-right: auto;
+  text-align:center;
+  padding:8px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  //font-size: 36px;
+  background-color:#f39c12;
+}

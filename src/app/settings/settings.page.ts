@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,8 @@ export class SettingsPage {
   private affiche = 'https://s3.amazonaws.com/storenvy/product_photos/112446/spoiler_alert_original.jpg';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   public ngOnInit(){
@@ -33,6 +35,10 @@ export class SettingsPage {
         this.donnee = reponse.records;
       }
     );
+  }
+
+  public gotohome(){
+    this.router.navigate(['game']);
   }
 
   public newspoil(){
