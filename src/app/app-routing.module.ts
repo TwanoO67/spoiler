@@ -7,7 +7,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: '../game/game.module#GamePageModule'
+        loadChildren: './game/game.module#GamePageModule'
       }
     ]
   },
@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: '../settings/settings.module#SettingsPageModule'
+        loadChildren: './settings/settings.module#SettingsPageModule'
       }
     ]
   },
