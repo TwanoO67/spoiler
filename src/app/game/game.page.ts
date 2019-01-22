@@ -90,29 +90,32 @@ export class GamePage {
     this.nextSpoiler();
   }
 
+  public markAsDone(){
+    if(this.spoiler){
+      this.spoiler.done = true;
+      this.done.push(this.spoiler);
+      //on remplace l'affiche si existante
+      if(!this.spoiler.id_themoviedb ){
+        this.affiche = this.default_affiche;
+      }
+      else {
+        this.http.get("https://api.themoviedb.org/3/movie/"+this.spoiler.id_themoviedb+"?api_key="+this.apikey).subscribe(
+          (reponse: any) => {
+            console.log(reponse);
+            this.affiche = 'https://image.tmdb.org/t/p/w500'+ reponse.poster_path;
+        });
+      }
+    }
+    else{
+      this.affiche = this.default_affiche;
+    }
+  }
+
   public traiteReponse(verify){
     this.loading = false;
     if(verify){
       this.step = "good_answer";
       this.total++;
-      if(this.spoiler){
-        this.spoiler.done = true;
-        this.done.push(this.spoiler);
-        //on remplace l'affiche si existante
-        if(!this.spoiler.id_themoviedb ){
-          this.affiche = this.default_affiche;
-        }
-        else {
-          this.http.get("https://api.themoviedb.org/3/movie/"+this.spoiler.id_themoviedb+"?api_key="+this.apikey).subscribe(
-            (reponse: any) => {
-              console.log(reponse);
-              this.affiche = 'https://image.tmdb.org/t/p/w500'+ reponse.poster_path;
-          });
-        }
-      }
-      else{
-        this.affiche = this.default_affiche;
-      }
     }
     else{
       this.step = "wrong_answer";
@@ -140,6 +143,7 @@ export class GamePage {
 
   private nextSpoiler(){
     //on marque le spoiler comme vu
+    this.markAsDone();
     this.step = "question";
 
     this.available = this.donnee.filter((spoil) => {
