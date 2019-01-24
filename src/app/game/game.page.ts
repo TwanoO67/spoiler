@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class GamePage {
 
-  public spoiler:any = {};
+  public spoiler:any = null;
   public reponse = "";
   public total = 0;
   public tentative = 0;
@@ -18,6 +18,7 @@ export class GamePage {
   public default_affiche = 'https://s3.amazonaws.com/storenvy/product_photos/112446/spoiler_alert_original.jpg';// 'http://i.imgrpost.com/imgr/2017/07/29/bond4.jpg';
   public past = 0;
   public affiche;
+  public loading = false;
   private available = [];
   private done = [];
   private apikey = "a733f160bd9f4737a83301a1f72af0c1";
@@ -25,7 +26,6 @@ export class GamePage {
   private start_date = 0;
   public duration = 0;
   public step = "welcome";
-  public loading = false;
   private donnee = [];
 
   constructor(
@@ -33,7 +33,7 @@ export class GamePage {
     private router: Router
   ) {
     //chargement des données
-    this.http.get(this.urlapi+"records/spoiler?filter=valid,eq,1",this.spoiler).subscribe(
+    this.http.get(this.urlapi+"records/spoiler?filter=valid,eq,1").subscribe(
       (reponse:any) => {
         this.donnee = reponse.records;
       }
@@ -94,6 +94,12 @@ export class GamePage {
     if(this.spoiler){
       this.spoiler.done = true;
       this.done.push(this.spoiler);
+      console.log('done',this.spoiler);
+    }
+  }
+
+  public loadNewThumbnail(){
+    this.loading = true;
       //on remplace l'affiche si existante
       if(!this.spoiler.id_themoviedb ){
         this.affiche = this.default_affiche;
@@ -103,12 +109,9 @@ export class GamePage {
           (reponse: any) => {
             console.log(reponse);
             this.affiche = 'https://image.tmdb.org/t/p/w500'+ reponse.poster_path;
+            this.loading = false;
         });
       }
-    }
-    else{
-      this.affiche = this.default_affiche;
-    }
   }
 
   public traiteReponse(verify){
@@ -116,6 +119,7 @@ export class GamePage {
     if(verify){
       this.step = "good_answer";
       this.total++;
+      this.loadNewThumbnail();
     }
     else{
       this.step = "wrong_answer";
@@ -150,11 +154,11 @@ export class GamePage {
       return !spoil.done;
     });
     this.tentative = 0;
-    this.past++;
-    if(this.available.length === 0 || this.past > this.taille_partie){
+    if(this.available.length === 0 || this.past >= this.taille_partie){
       this.end();
       return true;
     }
+    this.past++;
     this.reponse = "";
     this.findRandSpoiler();
 
