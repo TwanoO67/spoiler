@@ -1,7 +1,7 @@
 <ion-content >
     <div *ngIf="step === 'welcome'" class="container" >
       <div class="header"><h3>Spoiler !</h3></div>
-  
+
       <div class="main">
         <div class="title">
           Le Quizz qui vous ruine la fin des films!
@@ -15,7 +15,7 @@
             </ul>
         </div>
       </div>
-  
+
       <div class="footer">
         <div id="buttons">
           <div class="yellow-btn" (click)="init()">
@@ -26,25 +26,25 @@
           </div>
         </div>
       </div>
-  
+
     </div>
-  
+
   <div class="container" *ngIf="step === 'question'">
       <div class="header">
         <h3>De quel film s'agit-il ?</h3>
       </div>
-  
+
       <div class="main">
         <div class="title">
           {{ spoiler.description }}
         </div>
-  
+
         <div class="info">
             Titre du film:
-            <input type="text" [(ngModel)]="reponse" (keyup.enter)="verify()"/><br/>
+            <input class="reponse" type="text" [(ngModel)]="reponse" (keyup.enter)="verify()"/><br/>
         </div>
       </div>
-  
+
       <div class="footer">
         <div id="buttons">
           <div class="yellow-btn" *ngIf="loading">
@@ -58,12 +58,21 @@
           </div>
         </div>
       </div>
-  
+
     </div>
-    
+
     <div class="container" *ngIf="step === 'wrong_answer'">
       <div class="header">
         <h3>Mauvaise réponse... </h3>
+      </div>
+
+      <div class="main">
+        <div class="info">
+            Il vous reste {{ max_tentative - tentative }} tentatives.<br/>
+            <br/>
+            Conseil: Faites attention aux fautes de frappes.
+
+        </div>
       </div>
 
       <div class="footer">
@@ -75,7 +84,7 @@
             <span >Ré-essayer ?</span>
           </div>
           <div class="yellow-btn" (click)="pass()" *ngIf="!loading">
-            <span *ngIf="tentative < max_tentative">Question Suivante</span>
+            <span >Question Suivante</span>
           </div>
         </div>
       </div>
@@ -83,6 +92,9 @@
 
 
   <div class="container" *ngIf="step === 'good_answer'" >
+    <div class="header">
+      <h3>Bravo! </h3>
+    </div>
     <div class="main" style="background-color:black;" *ngIf="!loading">
       <img [src]="affiche" width='90%' style="margin-left:auto;margin-right:auto;"/>
     </div>
@@ -104,8 +116,22 @@
       <h3>Partie terminée!</h3>
     </div>
     <div class="main">
-        Votre score: {{total}}/{{this.done.length}}<br/>
-        Durée de la partie: {{this.duration}} secondes
+
+        <b>Votre score: {{total}}/{{this.done.length}} </b> <br/>
+        <b>Durée de la partie: {{this.duration}} secondes </b> <br/>
+        <div *ngFor="let past_spoiler of done; index as i">
+          {{i}}. {{past_spoiler.titre}}
+            <svg *ngIf="past_spoiler.found_response" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+              <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+              <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+            </svg>
+            <svg *ngIf="!past_spoiler.found_response" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+              <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+              <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+              <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+            </svg>
+        </div>
+
     </div>
     <div class="footer">
       <div id="buttons">

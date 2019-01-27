@@ -26,6 +26,7 @@ export class GamePage {
   private start_date = 0;
   public duration = 0;
   public step = "welcome";
+  private last_result;
   private donnee = [];
 
   constructor(
@@ -87,12 +88,14 @@ export class GamePage {
   }
 
   public pass(){
+    this.last_result = false;
     this.nextSpoiler();
   }
 
   public markAsDone(){
     if(this.spoiler){
       this.spoiler.done = true;
+      this.spoiler.found_response = this.last_result;
       this.done.push(this.spoiler);
       console.log('done',this.spoiler);
     }
@@ -115,6 +118,7 @@ export class GamePage {
   }
 
   public traiteReponse(verify){
+    this.last_result = verify;
     this.loading = false;
     if(verify){
       this.step = "good_answer";
