@@ -12,7 +12,7 @@ services:
       - "./www:/var/www/html/api"
       - "./config/apache/sites-available:/etc/apache2/sites-available"
       - "./config/apache/sites-enabled:/etc/apache2/sites-enabled"
-    working_dir: /var/www/html
+    working_dir: /var/www/html/api
     ports:
       - "${PORT}:80"
 
