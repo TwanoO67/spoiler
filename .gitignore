@@ -12,6 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+www/*
 .idea/
 .ionic/
 .sourcemaps/
@@ -19,7 +20,6 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
-www/
 node_modules/
 node_modules*/
 tmp/
