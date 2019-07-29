@@ -8,7 +8,7 @@ services:
     #On utilise la clef ssh, et config git du poste courant
       - "~/.ssh:/root/.ssh"
       - "./config/ssh-wwwdata:/var/www/.ssh"
-      - "~/.gitconfig:/root/.gitconfig"
+#      - "~/.gitconfig:/root/.gitconfig"
       # on envoi le code de l'api
       - "./www:/var/www/html/api"
       # on envoi les fichiers vhosts pour apache

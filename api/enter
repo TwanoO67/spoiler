@@ -1,0 +1,1 @@
+docker exec -it spoiler_php bash
