@@ -3,6 +3,9 @@ services:
     app:
         container_name: ionic
         image: agileek/ionic-framework
+        entrypoint: "tail -f /dev/null"
+        ports:
+            - 4201:4201
         volumes:
             - .:/myApp
             #- ~/.gradle:/root/.gradle
