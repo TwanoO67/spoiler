@@ -3,6 +3,8 @@ services:
     app:
         container_name: ionic
         image: agileek/ionic-framework
+        ports: 
+            - 8100:8100
         volumes:
             - .:/myApp
             #- ~/.gradle:/root/.gradle

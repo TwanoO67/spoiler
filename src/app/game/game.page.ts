@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ParseError } from '@angular/compiler';
 
 @Component({
   selector: 'app-game',
@@ -36,7 +37,7 @@ export class GamePage {
     //chargement des données
     this.http.get(this.urlapi+"spoiler?filter=valid,eq,1").subscribe(
       (reponse:any) => {
-        this.donnee = reponse.records;
+        this.donnee = reponse;
       }
     );
 
@@ -76,7 +77,7 @@ export class GamePage {
 
           let verify = false;
           reponse.results.slice(0,9).forEach((result) => {
-            if(this.spoiler.id_themoviedb === result.id){
+            if( parseInt(this.spoiler.id_themoviedb) === parseInt(result.id)){
               verify = true;
             }
           });
