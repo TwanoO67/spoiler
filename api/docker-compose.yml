@@ -2,13 +2,9 @@ version: '2.0'
 services:
   php:
     container_name: "${APP_NAME}_php"
-    image: intelligensia/numesia-apache-php:7.1
+    build: .
     restart: always
     volumes:
-    #On utilise la clef ssh, et config git du poste courant
-      - "~/.ssh:/root/.ssh"
-      - "./config/ssh-wwwdata:/var/www/.ssh"
-      - "~/.gitconfig:/root/.gitconfig"
       - "./www:/var/www/html/api"
       - "./config/apache/sites-available:/etc/apache2/sites-available"
       - "./config/apache/sites-enabled:/etc/apache2/sites-enabled"
