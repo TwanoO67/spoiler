@@ -16,3 +16,20 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::middleware('api')->group(function () {
+
+
+
+    Route::prefix('spoiler')->group(function () {
+        //Route::put('/', 'SpoilerController@create')->name('spoiler');
+
+        Route::prefix('{spoiler}')->group(function () {
+            //Route::get('/', 'ClientController@get')->name('spoiler.get');
+            Route::put('/', 'SpoilerController@update')->name('spoiler.update');
+            //Route::delete('/', 'ClientController@delete')->name('spoiler.delete');
+        });
+    });
+    Route::resource('spoiler', 'SpoilerController');
+});

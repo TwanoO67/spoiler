@@ -19,7 +19,7 @@ class SpoilersTable extends Migration
             $table->text('titre');
             $table->longText('description');
             $table->integer('id_themoviedb');
-            $table->boolean('valid');
+            $table->integer('valid');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });

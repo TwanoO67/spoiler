@@ -22,7 +22,7 @@ export class GamePage {
   private available = [];
   private done = [];
   private apikey = "a733f160bd9f4737a83301a1f72af0c1";
-  private urlapi = "http://test.weberantoine.fr/SPOILER/api.php/";
+  private urlapi = "http://localhost:4000/api/";
   private start_date = 0;
   public duration = 0;
   public step = "welcome";
@@ -34,7 +34,7 @@ export class GamePage {
     private router: Router
   ) {
     //chargement des données
-    this.http.get(this.urlapi+"records/spoiler?filter=valid,eq,1").subscribe(
+    this.http.get(this.urlapi+"spoiler?filter=valid,eq,1").subscribe(
       (reponse:any) => {
         this.donnee = reponse.records;
       }

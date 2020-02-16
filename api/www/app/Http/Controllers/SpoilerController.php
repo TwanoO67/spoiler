@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Spoiler;
 
 class SpoilerController extends BaseCRUDController
 {
-    protected $model_class = Client::class;
+    protected $model_class = Spoiler::class;
     protected $validation_rules = [
-        'name' => 'required|min:3',
-        'email' => 'required|email|min:6',
+        "description"=> 'required|min:3',
+        "titre"=> 'required|min:3',
+        "titre_original"=> 'required|min:3',
+        "id_themoviedb"=> 'required|integer|min:3',
+        "valid"=> 'required|integer|min:1',
     ];
 }
