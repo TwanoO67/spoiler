@@ -6,8 +6,46 @@ services:
     restart: always
     volumes:
       - "./www:/var/www/html/api"
+      # on envoi les fichiers vhosts pour apache
       - "./config/apache/sites-available:/etc/apache2/sites-available"
       - "./config/apache/sites-enabled:/etc/apache2/sites-enabled"
     working_dir: /var/www/html/api
     ports:
       - "${PORT}:80"
+
+    networks:
+      default:
+        aliases:
+          - "api.local"
+
+    links:
+    # on ouvre un lien reseau entre apache et mysql
+      - "db:db"
+
+  db:
+    container_name: "${APP_NAME}_db"
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      #on stoque sur le disque les données de mysql en persistant
+    volumes:
+      - "./data/db:/var/lib/mysql"
+
+  phpmyadmin:
+    container_name: "${APP_NAME}_phpmyadmin"
+    restart: always
+    image: phpmyadmin/phpmyadmin
+    environment:
+      # PMA_ARBITRARY: 1
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "${PMA_PORT}:80"
+    links:
+      # on ouvre un lien reseau entre phpmyadmin et mysql
+      - "db:db"
+
+volumes:
+    db:
+      driver: "local"
