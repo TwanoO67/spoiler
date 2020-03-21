@@ -19,6 +19,7 @@ export class GamePage {
   public default_affiche = 'https://s3.amazonaws.com/storenvy/product_photos/112446/spoiler_alert_original.jpg';// 'http://i.imgrpost.com/imgr/2017/07/29/bond4.jpg';
   public past = 0;
   public affiche;
+  public affiches = [];
   public loading = false;
   private available = [];
   private done = [];
@@ -90,7 +91,8 @@ export class GamePage {
 
   public pass(){
     this.last_result = false;
-    this.nextSpoiler();
+    this.step = "has_passed";
+    this.loadNewThumbnail();
   }
 
   public markAsDone(){
@@ -102,18 +104,29 @@ export class GamePage {
     }
   }
 
+  public async requestAfficheUrl(id){
+    if(typeof this.affiches[id] !== "undefined"){
+      return this.affiches[id];
+    }
+    else{
+      let reponse: any = await this.http.get("https://api.themoviedb.org/3/movie/"+this.spoiler.id_themoviedb+"?api_key="+this.apikey).toPromise();
+      console.log(reponse);
+      this.affiches[this.spoiler.id_themoviedb] = 'https://image.tmdb.org/t/p/w500'+ reponse.poster_path;
+      return 'https://image.tmdb.org/t/p/w500'+ reponse.poster_path;
+    }
+  }
+
   public loadNewThumbnail(){
     this.loading = true;
       //on remplace l'affiche si existante
       if(!this.spoiler.id_themoviedb ){
         this.affiche = this.default_affiche;
+        this.loading = false;
       }
       else {
-        this.http.get("https://api.themoviedb.org/3/movie/"+this.spoiler.id_themoviedb+"?api_key="+this.apikey).subscribe(
-          (reponse: any) => {
-            console.log(reponse);
-            this.affiche = 'https://image.tmdb.org/t/p/w500'+ reponse.poster_path;
-            this.loading = false;
+        this.requestAfficheUrl(this.spoiler.id_themoviedb).then((url) => {
+          this.affiche = url;
+          this.loading = false;
         });
       }
   }

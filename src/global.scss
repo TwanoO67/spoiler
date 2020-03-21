@@ -42,7 +42,10 @@ body {
 }
 
 .main {
-  background-color: #ececec;
+  //background-color: #ececec;
+  background: radial-gradient(ellipse farthest-corner at center top, #ffee75, #ff8930);
+  color: #8b9095;
+
   flex: 1 1 auto;
   // flex: 1 0 auto; // use this to implement sticky footer
   overflow-y: scroll;
@@ -70,4 +73,34 @@ body {
   align-items:center;
   //font-size: 36px;
   background-color:#f39c12;
+}
+
+@mixin center {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/*--------------------
+App
+--------------------*/
+.app {
+  @include center;
+  width: 90%;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+
+  h2 {
+    color: #525661;
+    font-size: 17px;
+    box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px 28px 0;
+    margin: -6px 0 0 0;
+  }
 }
