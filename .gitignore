@@ -30,6 +30,7 @@ plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
 
+api/.env
 api/data
 .DS_Store
 Thumbs.db
