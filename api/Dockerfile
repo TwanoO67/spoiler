@@ -49,7 +49,7 @@ RUN pecl install --onlyreqdeps --nobuild memcached \
 
 #Ajout d'extension php
 RUN docker-php-ext-configure gd
-RUN docker-php-ext-install gd calendar intl pcntl zip soap sockets
+RUN docker-php-ext-install gd calendar intl pcntl zip soap sockets pdo_mysql
 
 #Changement de timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime \
