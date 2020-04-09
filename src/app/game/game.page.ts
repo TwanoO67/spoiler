@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ParseError } from '@angular/compiler';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-game',
@@ -24,7 +24,7 @@ export class GamePage {
   private available = [];
   private done = [];
   private apikey = "a733f160bd9f4737a83301a1f72af0c1";
-  private urlapi = "http://localhost:4000/api/";
+  private urlapi = environment.urlapi;
   private start_date = 0;
   public duration = 0;
   public step = "welcome";

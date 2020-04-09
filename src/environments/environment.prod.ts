@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlapi: "https://test.weberantoine.fr/SPOILER/api.php/"
 };
