@@ -20,8 +20,8 @@ class SpoilersTable extends Migration
             $table->longText('description');
             $table->integer('id_themoviedb');
             $table->integer('valid');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
