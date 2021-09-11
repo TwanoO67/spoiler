@@ -1,0 +1,78 @@
+<ion-content>
+  <div class="container" >
+    <div class="header">
+    Créer ici votre nouveau SPOILER!
+    </div>
+
+
+    <div class="main" *ngIf="this.step === 'title'" >
+
+      <ion-item>
+        <ion-label>Titre du film</ion-label>
+        <ion-input [(ngModel)]="titre" (keyup.enter)="search()" name="titre"></ion-input>
+      </ion-item>
+      <p class="cta-holder">
+        <button (click)="search()" class="cta-button" style="float:right">Rechercher</button>
+    	</p>
+    </div>
+
+    <div class="main" *ngIf="this.step === 'select'" >
+      <ion-label>Choisissez parmis ces titres originaux</ion-label>
+      <ion-list>
+        <ion-item *ngFor="let pow of movies">
+          <ion-label (click)="select(pow.id)">{{pow.title}}</ion-label>
+        </ion-item>
+      </ion-list>
+      
+      <p class="cta-holder">
+        <button (click)="this.step = 'title'" class="cta-button" >Annuler</button>
+      </p>
+    </div>
+
+    <div class="main" *ngIf="this.step === 'spoil'" [style.backgroundImage]="'url('+affiche+')'"
+    style="background-repeat: no-repeat; background-attachment: fixed; background-position: center;" >
+          <h3 style="color:yellow">{{spoiler.titre}}</h3>
+          <ion-item>
+            <ion-label position="fixed">Votre spoiler</ion-label>
+            <ion-input [(ngModel)]="spoiler.description" (keyup.enter)="search()" placeholder="et à la fin..."></ion-input>
+          </ion-item>
+          <p class="cta-holder">
+            <button (click)="newspoil()" class="cta-button">Annuler</button>
+            <button (click)="save()" class="cta-button" style="float:right">Enregistrer</button>
+          </p>
+    </div>
+
+    <div class="main" *ngIf="this.step === 'exist'">
+      <p>
+        Désolé, Un spoiler existe déjà pour ce film.
+      </p>
+      <p class="cta-holder">
+        <button (click)="newspoil()" class="cta-button" style="float:right">Créer un autre Spoiler</button>
+      </p>
+    </div>
+
+    <div class="main" *ngIf="this.step === 'thanks'">
+      <p>
+        Merci votre spoiler est bien enregistré!
+      </p>
+      <p class="cta-holder">
+        <button (click)="newspoil()" class="cta-button">Créer un autre Spoiler</button>
+      </p>
+    </div>
+
+    <div class="main" *ngIf="this.loading">
+      <p>
+        Chargement en cours...
+      </p>
+    </div>
+
+    <div class="footer">
+      <div id="buttons">
+        <div class="yellow-btn" (click)="gotohome()">
+          <span>Accueil</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
