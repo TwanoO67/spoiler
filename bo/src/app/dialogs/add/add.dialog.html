@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 mat-dialog-title>Add new Issue</h3>
+  <h3 mat-dialog-titre>Add new Issue</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
@@ -13,7 +13,7 @@
     <!--Textarea for demo purposes-->
     <div class="form">
       <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" required ></textarea>
+        <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.titre" name="titre" required ></textarea>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
@@ -21,15 +21,15 @@
     <!--Contains mat-hint for characters count and has maxLengt set-->
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="State" [(ngModel)]="data.state" name="state" maxlength="10" required >
+        <input matInput #inputvalid class="form-control" placeholder="State" [(ngModel)]="data.valid" name="valid" maxlength="10" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-        <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
+        <mat-hint align="end">{{inputvalid.value?.length || 0}}/10</mat-hint>
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Url" [(ngModel)]="data.url" name="url">
+        <input matInput placeholder="Url" [(ngModel)]="data.description" name="description">
       </mat-form-field>
     </div>
 

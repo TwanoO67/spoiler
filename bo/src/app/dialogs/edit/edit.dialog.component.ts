@@ -33,6 +33,6 @@ export class EditDialogComponent {
   }
 
   stopEdit(): void {
-    this.dataService.updateIssue(this.data);
+    this.dataService.update(this.data);
   }
 }

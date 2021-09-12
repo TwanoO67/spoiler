@@ -4,13 +4,13 @@ import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {Issue} from './models/issue';
 import {DataSource} from '@angular/cdk/collections';
 import {AddDialogComponent} from './dialogs/add/add.dialog.component';
 import {EditDialogComponent} from './dialogs/edit/edit.dialog.component';
 import {DeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
 import {BehaviorSubject, fromEvent, merge, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import { Spoiler } from './models/spoiler';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,8 @@ import {map} from 'rxjs/operators';
 })
 
 export class AppComponent implements OnInit {
-  displayedColumns = ['id', 'title', 'state', 'url', 'created_at', 'updated_at', 'actions'];
+  public displayedColumnsOfItem = ['id', 'titre', 'titre_original', 'description', 'created_at', 'updated_at'];
+  displayedColumns = [...this.displayedColumnsOfItem, 'actions'];
   exampleDatabase: DataService | null;
   dataSource: ExampleDataSource | null;
   index: number;
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit {
 
   addNew() {
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {issue: Issue }
+      data: {item: Spoiler }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -56,13 +57,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
+  startEdit(i: number, id: number, titre: string, titre_original: string, description: string, created_at: string, updated_at: string) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: {id: id, title: title, state: state, url: url, created_at: created_at, updated_at: updated_at}
+      data: {id: id, titre: titre, titre_original: titre_original, description: description, created_at: created_at, updated_at: updated_at}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -77,11 +78,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  deleteItem(i: number, id: number, title: string, state: string, url: string) {
+  deleteItem(i: number, id: number, titre: string, titre_original: string, description: string) {
     this.index = i;
     this.id = id;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {id: id, title: title, state: state, url: url}
+      data: {id: id, titre: titre, titre_original: titre_original, description: description}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -98,7 +99,7 @@ export class AppComponent implements OnInit {
   private refreshTable() {
     // Refreshing table using paginator
     // Thanks yeager-j for tips
-    // https://github.com/marinantonio/angular-mat-table-crud/issues/12
+    // https://github.com/marinantonio/angular-mat-table-crud/items/12
     this.paginator._changePageSize(this.paginator.pageSize);
   }
 
@@ -136,7 +137,7 @@ export class AppComponent implements OnInit {
   }
 }
 
-export class ExampleDataSource extends DataSource<Issue> {
+export class ExampleDataSource extends DataSource<Spoiler> {
   _filterChange = new BehaviorSubject('');
 
   get filter(): string {
@@ -147,8 +148,8 @@ export class ExampleDataSource extends DataSource<Issue> {
     this._filterChange.next(filter);
   }
 
-  filteredData: Issue[] = [];
-  renderedData: Issue[] = [];
+  filteredData: Spoiler[] = [];
+  renderedData: Spoiler[] = [];
 
   constructor(public _exampleDatabase: DataService,
               public _paginator: MatPaginator,
@@ -159,7 +160,7 @@ export class ExampleDataSource extends DataSource<Issue> {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Issue[]> {
+  connect(): Observable<Spoiler[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
@@ -168,13 +169,13 @@ export class ExampleDataSource extends DataSource<Issue> {
       this._paginator.page
     ];
 
-    this._exampleDatabase.getAllIssues();
+    this._exampleDatabase.getAll();
 
 
     return merge(...displayDataChanges).pipe(map( () => {
         // Filter data
-        this.filteredData = this._exampleDatabase.data.slice().filter((issue: Issue) => {
-          const searchStr = (issue.id + issue.title + issue.url + issue.created_at).toLowerCase();
+        this.filteredData = this._exampleDatabase.data.slice().filter((item: Spoiler) => {
+          const searchStr = (item.id + item.titre + item.description + item.created_at).toLowerCase();
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
 
@@ -193,7 +194,7 @@ export class ExampleDataSource extends DataSource<Issue> {
 
 
   /** Returns a sorted copy of the database data. */
-  sortData(data: Issue[]): Issue[] {
+  sortData(data: Spoiler[]): Spoiler[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -204,9 +205,9 @@ export class ExampleDataSource extends DataSource<Issue> {
 
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
-        case 'state': [propertyA, propertyB] = [a.state, b.state]; break;
-        case 'url': [propertyA, propertyB] = [a.url, b.url]; break;
+        case 'titre': [propertyA, propertyB] = [a.titre, b.titre]; break;
+        case 'titre_original': [propertyA, propertyB] = [a.titre_original, b.titre_original]; break;
+        case 'description': [propertyA, propertyB] = [a.description, b.description]; break;
         case 'created_at': [propertyA, propertyB] = [a.created_at, b.created_at]; break;
         case 'updated_at': [propertyA, propertyB] = [a.updated_at, b.updated_at]; break;
       }

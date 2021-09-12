@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
-  <span>Angular 12 MatTable CRUD Example</span>
+  <span>Liste des spoiler</span>
   <span class="spacer"></span>
-  Reload data:
+  Recharger les données:
   <button mat-icon-button (click)="refresh()">
     <mat-icon>refresh</mat-icon>
   </button>
@@ -11,60 +11,31 @@
 
   <div class="form">
     <mat-form-field floatPlaceholder="never" color="accent">
-      <input matInput #filter placeholder="Filter issues">
+      <input matInput #filter placeholder="Filtrer les spoilers">
     </mat-form-field>
   </div>
 
   <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-    ng update @angular/cli @angular/core
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="state">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.state}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="url">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Url</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="created_at">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Created at</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="updated_at">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Updated at</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
+    <ng-container *ngFor="let name of displayedColumnsOfItem" matColumnDef="{{name}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{name}}</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row[name]}}</mat-cell>
     </ng-container>
 
     <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
         <button mat-icon-button color="primary" (click)="addNew()">
-          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          <mat-icon aria-label="Add">add</mat-icon>
         </button>
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.titre, row.valid, row.description, row.created_at, row.updated_at)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.titre, row.valid, row.description)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
@@ -76,7 +47,7 @@
 
 
   <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-    No results
+    Aucun résultat
   </div>
 
   <mat-paginator #paginator
