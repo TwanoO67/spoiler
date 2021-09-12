@@ -2,7 +2,7 @@ version: '2'
 services:
     app:
         container_name: spoiler_ionic
-        image: agileek/ionic-framework
+        image: beevelop/ionic:v5.2.3
         ports: 
             - 8100:8100
             - 4201:4201
