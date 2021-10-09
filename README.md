@@ -18,10 +18,17 @@ cd ..
 cd api
 ./enter_db
 mysql -u root -proot
-CREATE DATABASE laravel
+CREATE DATABASE laravel;
 exit
 exit
+
 ./enter
+cp .env.example .env
+vi .env
+DB_HOST=spoiler_db
+DB_PASSWORD=root
+
+php artisan key:gen
 php artisan mig:fresh
 php artisan db:seed
 
