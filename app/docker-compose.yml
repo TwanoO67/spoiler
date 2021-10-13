@@ -2,10 +2,11 @@ version: '2'
 services:
     app:
         container_name: spoiler_ionic
-        image: beevelop/ionic:v5.2.3
+        image: beevelop/ionic:latest
         ports: 
             - 8100:8100
             - 4201:4201
+        working_dir: /myApp
         volumes:
             - .:/myApp
             #- ~/.gradle:/root/.gradle
