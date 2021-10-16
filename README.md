@@ -36,6 +36,10 @@ php artisan db:seed
 
 ## TODO
 
-* Refaire l'api en laravel + test
-* Utiliser le background ici: https://codepen.io/supah/pen/WwoYjO
-* Renouveller la SPA sur derniere version IONIC
+[] Ne pas proposer des films déja eu lors d'une precedentes parties
+[] Envoyer les scores sur un serveur (pour stat)
+[] Ajouter des indices (citations)
+[x] Refaire l'api en laravel + test
+[] MaJ Laravel pour dependance
+[] Utiliser le background ici: https://codepen.io/supah/pen/WwoYjO
+[x] Renouveller la SPA sur derniere version IONIC
