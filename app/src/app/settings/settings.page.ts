@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 //https://phpmyadmin.ovh.net/db_structure.php?server=1&db=weberantspoiler&table=spoiler
 export class SettingsPage {
 
-  private titre = "";
-  private movies = [];
+  public titre = "";
+  public movies = [];
   private movie = "";
   private apikey = "a733f160bd9f4737a83301a1f72af0c1";
   private urltmdb = "https://api.themoviedb.org/3/";
   private urlapi = "http://test.weberantoine.fr/SPOILER/api.php/";
-  private spoiler: any = {};
+  public spoiler: any = {};
   public step = 'title';
   public loading = false;
   public error = "";

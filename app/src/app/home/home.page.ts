@@ -23,7 +23,7 @@ export class HomePage {
   public affiches = [];
   public loading = false;
   private available = [];
-  private done = [];
+  public done = [];
   private apikey = "a733f160bd9f4737a83301a1f72af0c1";
   private urlapi = environment.urlapi;
   private start_date = 0;
@@ -183,7 +183,7 @@ export class HomePage {
     this.spoiler = this.available[rand];
   }
 
-  private nextSpoiler(){
+  public nextSpoiler(){
     //on marque le spoiler comme vu
     this.markAsDone();
     this.step = "question";

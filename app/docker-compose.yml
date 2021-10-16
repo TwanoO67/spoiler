@@ -12,4 +12,4 @@ services:
         #command: tail -f /dev/null
         volumes:
             - .:/myApp
-            #- ~/.gradle:/root/.gradle
+            - ~/.gradle:/root/.gradle
