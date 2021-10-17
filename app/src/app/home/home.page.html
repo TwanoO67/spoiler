@@ -25,11 +25,13 @@
       </div>
       <div class="footer">
         <div id="buttons">
-          <div class="yellow-btn" (click)="init()">
-            <span>Lancer la partie</span>
-          </div>
+          
           <div class="yellow-btn" (click)="gotocreate()">
             <span>Créer un spoiler</span>
+          </div>
+
+          <div class="yellow-btn" (click)="init()">
+            <span>Lancer la partie</span>
           </div>
         </div>
       </div>
@@ -59,12 +61,15 @@
           <div class="yellow-btn" *ngIf="loading">
             Chargement...
           </div>
-          <div class="yellow-btn" (click)="verify()" *ngIf="!loading">
-            <span>Ok</span>
-          </div>
+          
           <div class="yellow-btn" (click)="pass()" *ngIf="!loading">
             <span>Passer</span>
           </div>
+
+          <div class="yellow-btn" (click)="verify()" *ngIf="!loading">
+            <span>Ok</span>
+          </div>
+          
         </div>
       </div>
 
