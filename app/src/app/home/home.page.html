@@ -69,7 +69,7 @@
           <div class="yellow-btn" (click)="verify()" *ngIf="!loading">
             <span>Ok</span>
           </div>
-          
+
         </div>
       </div>
 
@@ -94,12 +94,13 @@
           <div class="yellow-btn" *ngIf="loading">
             Chargement...
           </div>
-          <div class="yellow-btn" *ngIf="tentative < max_tentative && !loading" (click)="checkTentative()">
-            <span >Ré-essayer ?</span>
-          </div>
           <div class="yellow-btn" (click)="pass()" *ngIf="!loading">
             <span >Question Suivante</span>
           </div>
+          <div class="yellow-btn" *ngIf="tentative < max_tentative && !loading" (click)="checkTentative()">
+            <span >Ré-essayer ?</span>
+          </div>
+          
         </div>
       </div>
   </div>
