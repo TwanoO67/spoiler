@@ -62,20 +62,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project",
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
-      "cordova-plugin-ionic-keyboard": {}
-    },
-    "platforms": [
-      "android"
-    ]
-  }
+  "description": "An Ionic project"
 }
